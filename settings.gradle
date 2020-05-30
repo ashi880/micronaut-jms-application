@@ -1,0 +1,3 @@
+rootProject.name="micronaut-jms-mq"
+
+include "micronaut-jms-mq"

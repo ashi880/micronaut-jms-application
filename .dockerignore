@@ -1,0 +1,12 @@
+.gradle
+.idea
+build
+FFDC
+.*
+docker-compose.yml
+Dockerfile*
+Makefile
+micronaut-cli.yml
+*.iml
+mqjms.log*
+README.md

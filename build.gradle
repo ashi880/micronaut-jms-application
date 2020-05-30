@@ -1,0 +1,77 @@
+plugins {
+    id "net.ltgt.apt-eclipse" version "0.21"
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "application"
+}
+
+version "0.1"
+group "au.com.rma.micronaut.app"
+
+apply plugin: "java"
+apply plugin: "groovy"
+
+repositories {
+    jcenter()
+}
+
+configurations {
+    // for dependencies that are needed for development only
+    developmentOnly
+}
+
+dependencies {
+    annotationProcessor enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion")
+    annotationProcessor project('micronaut-jms-mq')
+    annotationProcessor "io.micronaut:micronaut-inject-java"
+    annotationProcessor "io.micronaut:micronaut-validation"
+
+    implementation enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion")
+    implementation project('micronaut-jms-mq')
+    implementation "io.micronaut:micronaut-inject"
+    implementation "io.micronaut:micronaut-validation"
+    implementation "io.micronaut:micronaut-runtime"
+    implementation "io.micronaut:micronaut-management"
+    implementation "io.micronaut:micronaut-messaging"
+    implementation "jakarta.transaction:jakarta.transaction-api"
+    implementation "io.micronaut.data:micronaut-data-jdbc"
+    implementation "javax.annotation:javax.annotation-api"
+    implementation "io.micronaut:micronaut-http-server-netty"
+    implementation "io.micronaut:micronaut-http-client"
+    implementation "org.apache.commons:commons-lang3:3.9"
+
+    runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
+    testAnnotationProcessor enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion")
+    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
+
+    testImplementation enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation "io.micronaut.test:micronaut-test-spock"
+    testImplementation "org.spockframework:spock-core"
+    testImplementation "io.micronaut:micronaut-inject-java"
+    testImplementation "io.micronaut:micronaut-inject-groovy"
+}
+
+test.classpath += configurations.developmentOnly
+
+mainClassName = "au.com.rma.micronaut.app.Application"
+
+java {
+    sourceCompatibility = JavaVersion.toVersion('1.8')
+    targetCompatibility = JavaVersion.toVersion('1.8')
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+    options.compilerArgs.add('-parameters')
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+tasks.withType(JavaExec) {
+    classpath += configurations.developmentOnly
+    jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+}
+
+
+

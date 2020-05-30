@@ -1,0 +1,45 @@
+micronaut:
+  application:
+    name: micronaut-jms-mq
+  server:
+    port: 8181
+
+mq-server:
+  admin:
+    host: "${mq.server:localhost}"
+    port: "${mq.port:1414}"
+    queueManager: QM1
+    channel: DEV.ADMIN.SVRCONN
+    username: admin
+    password: passw0rd
+
+  app:
+    host: "${mq.server:localhost}"
+    port: "${mq.port:1414}"
+    channel: DEV.APP.SVRCONN
+
+services:
+  replyQueue: queue:///DEV.REPLY.QUEUE
+
+  reverse:
+    queue: queue:///DEV.QUEUE.REVERSE
+    prefix: "pre-"
+    postfix: "-post"
+
+  upperCase:
+    queue: queue:///DEV.QUEUE.UPPERCASE
+
+  book:
+    queue: queue:///DEV.QUEUE.BOOK
+
+endpoints:
+  all:
+    enabled: true
+    sensitive: false
+  health:
+    details-visible: ANONYMOUS
+
+logger:
+  levels:
+    au.com.rma.micronaut.configuration: INFO
+
