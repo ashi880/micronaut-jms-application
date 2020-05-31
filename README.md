@@ -1,4 +1,4 @@
-#micronaut-jms-mq application
+# micronaut-jms-mq application
 
 This application provides a showcase for using the `micronaut-jms-mq` library to enable
 simple MQ applications with https://micronaut.io/
@@ -6,12 +6,12 @@ simple MQ applications with https://micronaut.io/
 The `mironaut-jms-mq` library provides an easy way to integrate IBM MQ into your micronaut
 microservice.
 
-##Getting Started
+## Getting Started
 
 These instructions will get the project up and running on your local machine for development
 and testing purposes.
 
-###Prerequisites
+### Prerequisites
 To start the application you need:
 * `docker` and `docker-compose` installed
 * `GNU Make` installed
@@ -70,7 +70,8 @@ This will expose several endpoints:
   }
 }
 ```
-##Quickstart
+
+## Quickstart
 The `micronaut-jms-mq` library requires configuration telling micronaut where the MQ servers are:
 ```yaml
 mq-server:
@@ -107,8 +108,7 @@ public class MessageServiceListener {
 }
 ```
 
-##Developer Getting Started
-
+## Developer Getting Started
 If you run:
 ```bash
 $ make start-mq
@@ -123,7 +123,7 @@ on http://localhost:8181/health
 
 You can also use a simple REST api to send messages:
 
-###Uppercase Service
+### Uppercase Service
 ```bash
 POST http://localhost:8181/api/upperCase
 
@@ -133,7 +133,7 @@ upper case text
 UPPER CASE TEXT
 ```
 
-###Reverse Service
+### Reverse Service
 ```bash
 POST http://localhost:8181/api/reverse HTTP/1.1
 
@@ -143,7 +143,7 @@ Some Text to Reverse
 pre-esreveR ot txeT emoS-post
 ```
 
-###Book Service
+### Book Service
 ```bash
 POST http://localhost:8181/api/book
 Content-Type: application/json
@@ -178,7 +178,7 @@ Accept: application/json
 }
 ```
 
-##Supported Features
+## Supported Features
 
 * Simple JMS Client annotations allow you to create an interface for sending messages
   * Includes support for topics
@@ -186,18 +186,19 @@ Accept: application/json
 * Simple JMS Listener annotations allow you to create a bean that receives messages from MQ
 * Uses docker-compose to start the application.
 
-##TODO
+## TODO
 
 * Add an example using Topics 
   * Simple chat client using Server Send Events (SSE)
 * Add support for different message types
 * Add @Transactional support
 
-#Authors
+# Authors
 * **Richard Allwood** - Initial Version
 
-##Licence
+## Licence
 This product is licensed under the MIT License
 
-##Acknowledgements
-The project was inspired from the [Micronaut RabbitMQ project](https://micronaut-projects.github.io/micronaut-rabbitmq/latest/guide/) 
+## Acknowledgements
+The project was inspired from the [Micronaut RabbitMQ project](https://micronaut-projects.github.io/micronaut-rabbitmq/latest/guide/)
+ 
